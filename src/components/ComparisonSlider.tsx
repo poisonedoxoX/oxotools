@@ -1,13 +1,15 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import watermarkImg from "@/assets/watermark.png";
 
 interface ComparisonSliderProps {
   originalSrc: string;
   editedSrc: string;
   hasTransparency?: boolean;
+  showWatermark?: boolean;
 }
 
-const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, editedSrc, hasTransparency }) => {
+const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, editedSrc, hasTransparency, showWatermark = true }) => {
   const [position, setPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -20,19 +22,12 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
     setPosition(percent);
   }, []);
 
-  const handleMouseDown = useCallback(() => {
-    isDragging.current = true;
-  }, []);
-
+  const handleMouseDown = useCallback(() => { isDragging.current = true; }, []);
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isDragging.current) return;
     updatePosition(e.clientX);
   }, [updatePosition]);
-
-  const handleMouseUp = useCallback(() => {
-    isDragging.current = false;
-  }, []);
-
+  const handleMouseUp = useCallback(() => { isDragging.current = false; }, []);
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     updatePosition(e.touches[0].clientX);
   }, [updatePosition]);
@@ -57,12 +52,19 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
         <img src={editedSrc} alt="Edited" className="block w-full h-auto max-h-[60vh] object-contain" />
 
         {/* Original (clipped) */}
-        <div
-          className="absolute inset-0"
-          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-        >
+        <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
           <img src={originalSrc} alt="Original" className="block w-full h-auto max-h-[60vh] object-contain" />
         </div>
+
+        {/* Watermark */}
+        {showWatermark && (
+          <img
+            src={watermarkImg}
+            alt=""
+            className="absolute bottom-2 left-2 w-10 h-10 md:w-12 md:h-12 opacity-60 pointer-events-none select-none"
+            draggable={false}
+          />
+        )}
 
         {/* Slider line */}
         <div
@@ -73,12 +75,8 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
         </div>
 
         {/* Labels */}
-        <span className="absolute top-3 left-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">
-          Original
-        </span>
-        <span className="absolute top-3 right-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">
-          Edited
-        </span>
+        <span className="absolute top-3 left-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">Original</span>
+        <span className="absolute top-3 right-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">Edited</span>
       </div>
     </motion.div>
   );

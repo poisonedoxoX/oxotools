@@ -16,6 +16,7 @@ const Index = () => {
   const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBackgroundRemoved, setIsBackgroundRemoved] = useState(false);
+  const [watermarkRemoved, setWatermarkRemoved] = useState(false);
 
   const handleImageUpload = useCallback((file: File, dataUrl: string) => {
     setOriginalImage(dataUrl);
@@ -117,10 +118,11 @@ const Index = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <ComparisonSlider
+              <ComparisonSlider
                   originalSrc={originalImage}
                   editedSrc={editedImage}
                   hasTransparency={isBackgroundRemoved}
+                  showWatermark={!watermarkRemoved}
                 />
               </motion.div>
             ) : (
@@ -149,6 +151,8 @@ const Index = () => {
           isProcessing={isProcessing}
           hasImage={!!originalImage}
           hasResult={!!editedImage}
+          onWatermarkRemoved={setWatermarkRemoved}
+          watermarkRemoved={watermarkRemoved}
         />
       )}
     </div>
