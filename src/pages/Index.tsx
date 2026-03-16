@@ -151,6 +151,8 @@ const Index = () => {
           isProcessing={isProcessing}
           hasImage={!!originalImage}
           hasResult={!!editedImage}
+          onWatermarkRemoved={setWatermarkRemoved}
+          watermarkRemoved={watermarkRemoved}
         />
       )}
     </div>
