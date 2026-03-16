@@ -118,10 +118,11 @@ const Index = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <ComparisonSlider
+              <ComparisonSlider
                   originalSrc={originalImage}
                   editedSrc={editedImage}
                   hasTransparency={isBackgroundRemoved}
+                  showWatermark={!watermarkRemoved}
                 />
               </motion.div>
             ) : (
