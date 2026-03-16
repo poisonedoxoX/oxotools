@@ -16,6 +16,7 @@ const Index = () => {
   const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBackgroundRemoved, setIsBackgroundRemoved] = useState(false);
+  const [watermarkRemoved, setWatermarkRemoved] = useState(false);
 
   const handleImageUpload = useCallback((file: File, dataUrl: string) => {
     setOriginalImage(dataUrl);
