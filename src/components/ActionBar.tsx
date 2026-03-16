@@ -35,7 +35,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
-      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 p-2 bg-surface/80 backdrop-blur-xl rounded-2xl border border-foreground/5 shadow-stack"
+      className="fixed bottom-0 left-0 right-0 md:bottom-8 md:left-1/2 md:right-auto md:-translate-x-1/2 z-50 flex items-center gap-2 p-2 bg-surface/80 backdrop-blur-xl md:rounded-2xl border-t md:border border-foreground/5 shadow-stack"
     >
       {/* Processing indicator */}
       {isProcessing && (
