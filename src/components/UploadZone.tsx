@@ -55,8 +55,8 @@ const UploadZone: React.FC<UploadZoneProps> = ({ onImageUpload }) => {
       onDragLeave={handleDragLeave}
       onClick={handleClick}
       className={`
-        flex flex-col items-center justify-center w-full max-w-2xl aspect-[4/3]
-        rounded-[20px] cursor-pointer transition-colors duration-200
+        flex flex-col items-center justify-center w-full max-w-2xl aspect-[3/2] md:aspect-[4/3]
+        rounded-xl md:rounded-[20px] cursor-pointer transition-colors duration-200
         border border-dashed
         ${isDragOver
           ? "bg-surface border-primary"

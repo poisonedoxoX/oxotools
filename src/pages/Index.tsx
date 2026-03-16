@@ -83,12 +83,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4">
-        <h1 className="text-sm font-medium tracking-wider uppercase text-muted-foreground">
+      <header className="flex items-center justify-between px-3 py-3 md:px-6 md:py-4">
+        <h1 className="text-xs md:text-sm font-medium tracking-wider uppercase text-muted-foreground">
           Image Workbench
         </h1>
         {originalImage && (
-          <div className="flex items-center gap-4 text-[11px] text-muted-foreground/60 tabular-nums tracking-wide">
+          <div className="hidden md:flex items-center gap-4 text-[11px] text-muted-foreground/60 tabular-nums tracking-wide">
             <span>{fileName}</span>
             <span>{dimensions}</span>
             <span>{fileSize}</span>
@@ -97,7 +97,7 @@ const Index = () => {
       </header>
 
       {/* Main canvas area */}
-      <main className="flex-1 flex items-center justify-center px-6 pb-24">
+      <main className="flex-1 flex items-center justify-center px-2 pb-20 md:px-6 md:pb-24">
         <div className="w-full max-w-4xl">
           <AnimatePresence mode="wait">
             {!originalImage ? (

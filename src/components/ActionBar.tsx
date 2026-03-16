@@ -51,7 +51,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
         onKeyDown={handleKeyDown}
         placeholder="Describe changes..."
         disabled={!hasImage || isProcessing}
-        className="bg-transparent px-4 py-2 w-64 focus:outline-none text-sm text-foreground placeholder:text-muted-foreground disabled:opacity-40"
+        className="bg-transparent px-4 py-2 flex-1 min-w-0 md:w-64 md:flex-none focus:outline-none text-sm text-foreground placeholder:text-muted-foreground disabled:opacity-40"
       />
 
       <button

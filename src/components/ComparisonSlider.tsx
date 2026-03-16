@@ -42,7 +42,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-      className="p-4 bg-surface rounded-[20px] shadow-stack"
+      className="p-1 md:p-4 bg-surface rounded-xl md:rounded-[20px] shadow-stack"
     >
       <div
         ref={containerRef}
