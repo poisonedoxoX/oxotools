@@ -1,0 +1,4 @@
+project_id = "xmkdeqvtpmfaptvolvot"
+
+[functions.image-process]
+verify_jwt = false
