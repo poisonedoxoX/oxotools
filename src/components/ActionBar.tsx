@@ -145,7 +145,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
               onClick={() => {
                 if (watermarkRemoved) {
                   onWatermarkRemoved(false);
-                  toast("Watermark restored.");
+                  toast(t("watermarkRestored"));
                 } else {
                   setShowPasswordInput((v) => !v);
                 }
