@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { motion } from "framer-motion";
+import { useT } from "@/hooks/use-lang";
 import { Upload } from "lucide-react";
 
 interface UploadZoneProps {
