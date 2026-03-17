@@ -77,8 +77,8 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
         </div>
 
         {/* Labels */}
-        <span className="absolute top-3 left-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">Original</span>
-        <span className="absolute top-3 right-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">Edited</span>
+        <span className="absolute top-3 left-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">{t("original")}</span>
+        <span className="absolute top-3 right-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">{t("edited")}</span>
       </div>
     </motion.div>
   );

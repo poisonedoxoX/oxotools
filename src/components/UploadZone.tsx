@@ -68,10 +68,10 @@ const UploadZone: React.FC<UploadZoneProps> = ({ onImageUpload }) => {
     >
       <Upload className="w-8 h-8 text-muted-foreground mb-4" strokeWidth={1.5} />
       <p className="text-sm font-medium text-muted-foreground tracking-wide uppercase">
-        Drop image to begin
+        {t("dropImage")}
       </p>
       <p className="text-xs text-muted-foreground/50 mt-2">
-        or click to browse
+        {t("orClickUpload")}
       </p>
     </motion.div>
   );
