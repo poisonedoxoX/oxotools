@@ -121,7 +121,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
         <button
           onClick={onRemoveBg}
           disabled={!hasImage || isProcessing}
-          title="Remove background"
+          title={t("removeBackground")}
           className="p-2 hover:bg-foreground/5 rounded-lg transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none active:scale-95"
         >
           {isProcessing ? (
