@@ -58,7 +58,7 @@ const Index = () => {
       if (data?.image) {
         setEditedImage(data.image);
         if (action === "remove-bg") setIsBackgroundRemoved(true);
-        toast.success(action === "remove-bg" ? "Subject isolated." : "Edit applied.");
+        toast.success(action === "remove-bg" ? t("subjectIsolated") : t("editApplied"));
       }
     } catch (err) {
       console.error(err);
