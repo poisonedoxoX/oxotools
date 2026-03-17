@@ -61,7 +61,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
           <img
             src={watermarkImg}
             alt=""
-            className="absolute bottom-2 left-2 w-10 h-10 md:w-12 md:h-12 opacity-60 pointer-events-none select-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 opacity-50 pointer-events-none select-none"
             draggable={false}
           />
         )}
