@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import watermarkImg from "@/assets/watermark.png";
+import { useT } from "@/hooks/use-lang";
 
 interface ComparisonSliderProps {
   originalSrc: string;
@@ -13,6 +14,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
   const [position, setPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+  const t = useT();
 
   const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -61,7 +63,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
           <img
             src={watermarkImg}
             alt=""
-            className="absolute bottom-2 left-2 w-10 h-10 md:w-12 md:h-12 opacity-60 pointer-events-none select-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 opacity-50 pointer-events-none select-none"
             draggable={false}
           />
         )}
@@ -75,8 +77,8 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
         </div>
 
         {/* Labels */}
-        <span className="absolute top-3 left-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">Original</span>
-        <span className="absolute top-3 right-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">Edited</span>
+        <span className="absolute top-3 left-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">{t("original")}</span>
+        <span className="absolute top-3 right-3 text-[10px] font-medium tracking-wider uppercase text-foreground/60 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">{t("edited")}</span>
       </div>
     </motion.div>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eraser, Download, Loader2, Lock, Unlock } from "lucide-react";
 import { toast } from "sonner";
+import { useT } from "@/hooks/use-lang";
 
 interface ActionBarProps {
   prompt: string;
@@ -30,6 +31,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 }) => {
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [password, setPassword] = useState("");
+  const t = useT();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey && prompt.trim()) {
@@ -42,9 +44,9 @@ const ActionBar: React.FC<ActionBarProps> = ({
     if (password === "AyllonAIfamilia") {
       onWatermarkRemoved(true);
       setShowPasswordInput(false);
-      toast.success("Watermark removed!");
+      toast.success(t("watermarkRemoved"));
     } else {
-      toast.error("Incorrect password.");
+      toast.error(t("incorrectPassword"));
     }
     setPassword("");
   };
@@ -83,7 +85,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={handlePasswordKeyDown}
-                placeholder="Enter password..."
+                placeholder={t("enterPassword")}
                 autoFocus
                 className="bg-foreground/5 px-3 py-1.5 flex-1 min-w-0 rounded-lg focus:outline-none text-sm text-foreground placeholder:text-muted-foreground"
               />
@@ -91,7 +93,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
                 onClick={handlePasswordSubmit}
                 className="bg-primary px-3 py-1.5 rounded-lg text-xs font-medium text-primary-foreground hover:brightness-110 active:scale-95 transition-all"
               >
-                Submit
+                {t("submit")}
               </button>
             </div>
           </motion.div>
@@ -111,7 +113,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
           value={prompt}
           onChange={(e) => onPromptChange(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Describe changes..."
+          placeholder={t("describeChanges")}
           disabled={!hasImage || isProcessing}
           className="bg-transparent px-4 py-2 flex-1 min-w-0 md:w-64 md:flex-none focus:outline-none text-sm text-foreground placeholder:text-muted-foreground disabled:opacity-40"
         />
@@ -119,7 +121,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
         <button
           onClick={onRemoveBg}
           disabled={!hasImage || isProcessing}
-          title="Remove background"
+          title={t("removeBackground")}
           className="p-2 hover:bg-foreground/5 rounded-lg transition-all duration-150 disabled:opacity-30 disabled:pointer-events-none active:scale-95"
         >
           {isProcessing ? (
@@ -134,7 +136,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
           disabled={!hasImage || isProcessing || !prompt.trim()}
           className="bg-primary px-4 py-2 rounded-lg text-sm font-medium text-primary-foreground hover:brightness-110 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none"
         >
-          Generate
+          {t("generate")}
         </button>
 
         {hasResult && (
@@ -143,12 +145,12 @@ const ActionBar: React.FC<ActionBarProps> = ({
               onClick={() => {
                 if (watermarkRemoved) {
                   onWatermarkRemoved(false);
-                  toast("Watermark restored.");
+                  toast(t("watermarkRestored"));
                 } else {
                   setShowPasswordInput((v) => !v);
                 }
               }}
-              title={watermarkRemoved ? "Restore watermark" : "Remove watermark"}
+              title={watermarkRemoved ? t("restoreWatermark") : t("removeWatermark")}
               className="p-2 hover:bg-foreground/5 rounded-lg transition-all active:scale-95"
             >
               {watermarkRemoved ? (
@@ -160,7 +162,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 
             <button
               onClick={onDownload}
-              title="Download result"
+              title={t("downloadResult")}
               className="p-2 hover:bg-foreground/5 rounded-lg transition-all active:scale-95"
             >
               <Download size={18} className="text-muted-foreground" />

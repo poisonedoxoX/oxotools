@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useT } from "@/hooks/use-lang";
 import UploadZone from "@/components/UploadZone";
 import ImageCanvas from "@/components/ImageCanvas";
 import ComparisonSlider from "@/components/ComparisonSlider";
@@ -17,6 +18,7 @@ const Index = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBackgroundRemoved, setIsBackgroundRemoved] = useState(false);
   const [watermarkRemoved, setWatermarkRemoved] = useState(false);
+  const t = useT();
 
   const handleImageUpload = useCallback((file: File, dataUrl: string) => {
     setOriginalImage(dataUrl);
@@ -44,8 +46,7 @@ const Index = () => {
       });
 
       if (error) {
-        toast.error("Processing failed. Please try again.");
-        console.error(error);
+        toast.error(t("processingFailed"));
         return;
       }
 
@@ -57,11 +58,11 @@ const Index = () => {
       if (data?.image) {
         setEditedImage(data.image);
         if (action === "remove-bg") setIsBackgroundRemoved(true);
-        toast.success(action === "remove-bg" ? "Subject isolated." : "Edit applied.");
+        toast.success(action === "remove-bg" ? t("subjectIsolated") : t("editApplied"));
       }
     } catch (err) {
       console.error(err);
-      toast.error("An unexpected error occurred.");
+      toast.error(t("unexpectedError"));
     } finally {
       setIsProcessing(false);
     }
@@ -86,7 +87,7 @@ const Index = () => {
       {/* Header */}
       <header className="flex items-center justify-between px-3 py-3 md:px-6 md:py-4">
         <h1 className="text-xs md:text-sm font-medium tracking-wider uppercase text-muted-foreground">
-          Image Workbench
+          {t("title")}
         </h1>
         {originalImage && (
           <div className="hidden md:flex items-center gap-4 text-[11px] text-muted-foreground/60 tabular-nums tracking-wide">
