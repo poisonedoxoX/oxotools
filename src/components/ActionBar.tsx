@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eraser, Download, Loader2, Lock, Unlock } from "lucide-react";
 import { toast } from "sonner";
+import { useT } from "@/hooks/use-lang";
 
 interface ActionBarProps {
   prompt: string;
