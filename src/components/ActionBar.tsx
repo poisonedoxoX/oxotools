@@ -150,7 +150,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
                   setShowPasswordInput((v) => !v);
                 }
               }}
-              title={watermarkRemoved ? "Restore watermark" : "Remove watermark"}
+              title={watermarkRemoved ? t("restoreWatermark") : t("removeWatermark")}
               className="p-2 hover:bg-foreground/5 rounded-lg transition-all active:scale-95"
             >
               {watermarkRemoved ? (
