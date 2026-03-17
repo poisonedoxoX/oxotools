@@ -44,9 +44,9 @@ const ActionBar: React.FC<ActionBarProps> = ({
     if (password === "AyllonAIfamilia") {
       onWatermarkRemoved(true);
       setShowPasswordInput(false);
-      toast.success("Watermark removed!");
+      toast.success(t("watermarkRemoved"));
     } else {
-      toast.error("Incorrect password.");
+      toast.error(t("incorrectPassword"));
     }
     setPassword("");
   };
