@@ -9,6 +9,7 @@ interface UploadZoneProps {
 
 const UploadZone: React.FC<UploadZoneProps> = ({ onImageUpload }) => {
   const [isDragOver, setIsDragOver] = useState(false);
+  const t = useT();
 
   const handleFile = useCallback((file: File) => {
     if (!file.type.startsWith("image/")) return;
