@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import watermarkImg from "@/assets/watermark.png";
+import { useT } from "@/hooks/use-lang";
 
 interface ComparisonSliderProps {
   originalSrc: string;
