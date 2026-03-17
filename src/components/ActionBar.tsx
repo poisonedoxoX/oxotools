@@ -93,7 +93,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
                 onClick={handlePasswordSubmit}
                 className="bg-primary px-3 py-1.5 rounded-lg text-xs font-medium text-primary-foreground hover:brightness-110 active:scale-95 transition-all"
               >
-                Submit
+                {t("submit")}
               </button>
             </div>
           </motion.div>
