@@ -46,8 +46,7 @@ const Index = () => {
       });
 
       if (error) {
-        toast.error("Processing failed. Please try again.");
-        console.error(error);
+        toast.error(t("processingFailed"));
         return;
       }
 
