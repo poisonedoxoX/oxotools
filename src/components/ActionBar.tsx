@@ -85,7 +85,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={handlePasswordKeyDown}
-                placeholder="Enter password..."
+                placeholder={t("enterPassword")}
                 autoFocus
                 className="bg-foreground/5 px-3 py-1.5 flex-1 min-w-0 rounded-lg focus:outline-none text-sm text-foreground placeholder:text-muted-foreground"
               />
