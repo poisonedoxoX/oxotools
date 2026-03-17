@@ -136,7 +136,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
           disabled={!hasImage || isProcessing || !prompt.trim()}
           className="bg-primary px-4 py-2 rounded-lg text-sm font-medium text-primary-foreground hover:brightness-110 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none"
         >
-          Generate
+          {t("generate")}
         </button>
 
         {hasResult && (
