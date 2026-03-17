@@ -62,7 +62,7 @@ const Index = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("An unexpected error occurred.");
+      toast.error(t("unexpectedError"));
     } finally {
       setIsProcessing(false);
     }
