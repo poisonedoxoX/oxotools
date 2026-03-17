@@ -14,6 +14,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ originalSrc, edited
   const [position, setPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+  const t = useT();
 
   const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
