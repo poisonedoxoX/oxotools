@@ -162,7 +162,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 
             <button
               onClick={onDownload}
-              title="Download result"
+              title={t("downloadResult")}
               className="p-2 hover:bg-foreground/5 rounded-lg transition-all active:scale-95"
             >
               <Download size={18} className="text-muted-foreground" />
