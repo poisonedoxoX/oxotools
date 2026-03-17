@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useT } from "@/hooks/use-lang";
 import UploadZone from "@/components/UploadZone";
 import ImageCanvas from "@/components/ImageCanvas";
 import ComparisonSlider from "@/components/ComparisonSlider";
