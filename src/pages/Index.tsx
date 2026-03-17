@@ -18,6 +18,7 @@ const Index = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBackgroundRemoved, setIsBackgroundRemoved] = useState(false);
   const [watermarkRemoved, setWatermarkRemoved] = useState(false);
+  const t = useT();
 
   const handleImageUpload = useCallback((file: File, dataUrl: string) => {
     setOriginalImage(dataUrl);
