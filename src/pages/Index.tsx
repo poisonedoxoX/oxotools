@@ -87,7 +87,7 @@ const Index = () => {
       {/* Header */}
       <header className="flex items-center justify-between px-3 py-3 md:px-6 md:py-4">
         <h1 className="text-xs md:text-sm font-medium tracking-wider uppercase text-muted-foreground">
-          Image Workbench
+          {t("title")}
         </h1>
         {originalImage && (
           <div className="hidden md:flex items-center gap-4 text-[11px] text-muted-foreground/60 tabular-nums tracking-wide">
