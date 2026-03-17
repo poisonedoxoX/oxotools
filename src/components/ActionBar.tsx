@@ -31,6 +31,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
 }) => {
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [password, setPassword] = useState("");
+  const t = useT();
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey && prompt.trim()) {
