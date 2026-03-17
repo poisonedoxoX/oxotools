@@ -22,64 +22,13 @@ serve(async (req) => {
     let messages;
 
     if (action === "remove-bg") {
-      // Step 1: Analyze with Gemini 3 Flash
-      const analyzeResponse = await fetch(
-        "https://ai.gateway.lovable.dev/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${LOVABLE_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "google/gemini-3-flash-preview",
-            messages: [
-              {
-                role: "user",
-                content: [
-                  {
-                    type: "text",
-                    text: "Analyze this image and describe the main subject/foreground object in detail. Be specific about what should be kept vs what is the background.",
-                  },
-                  {
-                    type: "image_url",
-                    image_url: { url: imageBase64 },
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      );
-
-      if (!analyzeResponse.ok) {
-        const errText = await analyzeResponse.text();
-        console.error("Analysis error:", analyzeResponse.status, errText);
-
-        if (analyzeResponse.status === 429) {
-          return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), {
-            status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
-        }
-        if (analyzeResponse.status === 402) {
-          return new Response(JSON.stringify({ error: "Usage limit reached. Please add credits." }), {
-            status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" },
-          });
-        }
-        throw new Error(`Analysis failed: ${analyzeResponse.status}`);
-      }
-
-      const analysis = await analyzeResponse.json();
-      const subjectDescription = analysis.choices?.[0]?.message?.content || "the main subject";
-
-      // Step 2: Generate with Nano Banana Pro (background removal)
       messages = [
         {
           role: "user",
           content: [
             {
               type: "text",
-              text: `Remove the background from this image completely. Keep only ${subjectDescription}. The result should have a transparent/white background with only the main subject visible. Output the isolated subject on a clean white background.`,
+              text: "Remove the background from this image completely. Keep only the main subject. Output the isolated subject on a clean white background.",
             },
             {
               type: "image_url",
@@ -110,7 +59,6 @@ serve(async (req) => {
       throw new Error("Invalid action. Use 'remove-bg' or 'edit'.");
     }
 
-    // Generate with Nano Banana Pro
     const generateResponse = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
       {
@@ -120,7 +68,7 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "google/gemini-3-pro-image-preview",
+          model: "google/gemini-3.1-flash-image-preview",
           messages,
           modalities: ["image", "text"],
         }),
