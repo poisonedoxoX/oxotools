@@ -45,6 +45,9 @@ export const translations = {
     orClickUpload: "o haz clic para subir",
     original: "Original",
     edited: "Editado",
+    chatAssistant: "Asistente",
+    chatPlaceholder: "Pregúntame sobre edición...",
+    chatInputPlaceholder: "Escribe un mensaje...",
   },
 } as const;
 

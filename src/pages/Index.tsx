@@ -157,6 +157,8 @@ const Index = () => {
           watermarkRemoved={watermarkRemoved}
         />
       )}
+
+      <ChatBubble />
     </div>
   );
 };
