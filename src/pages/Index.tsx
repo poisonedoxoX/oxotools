@@ -7,6 +7,7 @@ import UploadZone from "@/components/UploadZone";
 import ImageCanvas from "@/components/ImageCanvas";
 import ComparisonSlider from "@/components/ComparisonSlider";
 import ActionBar from "@/components/ActionBar";
+import ChatBubble from "@/components/ChatBubble";
 
 const Index = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -156,6 +157,8 @@ const Index = () => {
           watermarkRemoved={watermarkRemoved}
         />
       )}
+
+      <ChatBubble />
     </div>
   );
 };
