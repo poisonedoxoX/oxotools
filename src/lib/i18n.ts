@@ -20,6 +20,9 @@ export const translations = {
     orClickUpload: "or click to upload",
     original: "Original",
     edited: "Edited",
+    chatAssistant: "Assistant",
+    chatPlaceholder: "Ask me anything about editing...",
+    chatInputPlaceholder: "Type a message...",
   },
   es: {
     title: "Editor de Imágenes",
