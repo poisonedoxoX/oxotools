@@ -23,6 +23,7 @@ export const translations = {
     chatAssistant: "Assistant",
     chatPlaceholder: "Ask me anything about editing...",
     chatInputPlaceholder: "Type a message...",
+    chatEditHint: "Describe the changes you want — I'll apply them to your image.",
   },
   es: {
     title: "Editor de Imágenes",
@@ -48,6 +49,7 @@ export const translations = {
     chatAssistant: "Asistente",
     chatPlaceholder: "Pregúntame sobre edición...",
     chatInputPlaceholder: "Escribe un mensaje...",
+    chatEditHint: "Describe los cambios que quieres — los aplicaré a tu imagen.",
   },
 } as const;
 
