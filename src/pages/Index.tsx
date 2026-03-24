@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,7 +7,8 @@ import UploadZone from "@/components/UploadZone";
 import ImageCanvas from "@/components/ImageCanvas";
 import ComparisonSlider from "@/components/ComparisonSlider";
 import ActionBar from "@/components/ActionBar";
-import ChatBubble from "@/components/ChatBubble";
+
+const ChatPanel = lazy(() => import("@/components/ChatPanel"));
 
 const Index = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -15,10 +16,10 @@ const Index = () => {
   const [fileName, setFileName] = useState<string>("");
   const [fileSize, setFileSize] = useState<string>("");
   const [dimensions, setDimensions] = useState<string>("");
-  const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBackgroundRemoved, setIsBackgroundRemoved] = useState(false);
   const [watermarkRemoved, setWatermarkRemoved] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const t = useT();
 
   const handleImageUpload = useCallback((file: File, dataUrl: string) => {
@@ -67,13 +68,13 @@ const Index = () => {
     } finally {
       setIsProcessing(false);
     }
-  }, [originalImage]);
+  }, [originalImage, t]);
 
   const handleRemoveBg = useCallback(() => processImage("remove-bg"), [processImage]);
 
-  const handleGenerate = useCallback(() => {
+  const handleApplyEdit = useCallback((prompt: string) => {
     if (prompt.trim()) processImage("edit", prompt.trim());
-  }, [processImage, prompt]);
+  }, [processImage]);
 
   const handleDownload = useCallback(() => {
     if (!editedImage) return;
@@ -99,6 +100,20 @@ const Index = () => {
         )}
       </header>
 
+      {/* Chat Panel (left side) */}
+      <AnimatePresence>
+        {chatOpen && (
+          <Suspense fallback={null}>
+            <ChatPanel
+              onClose={() => setChatOpen(false)}
+              onApplyEdit={handleApplyEdit}
+              hasImage={!!originalImage}
+              isProcessing={isProcessing}
+            />
+          </Suspense>
+        )}
+      </AnimatePresence>
+
       {/* Main canvas area */}
       <main className="flex-1 flex items-center justify-center px-2 pb-20 md:px-6 md:pb-24">
         <div className="w-full max-w-4xl">
@@ -120,7 +135,7 @@ const Index = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-              <ComparisonSlider
+                <ComparisonSlider
                   originalSrc={originalImage}
                   editedSrc={editedImage}
                   hasTransparency={isBackgroundRemoved}
@@ -145,20 +160,17 @@ const Index = () => {
       {/* Action Bar */}
       {originalImage && (
         <ActionBar
-          prompt={prompt}
-          onPromptChange={setPrompt}
           onRemoveBg={handleRemoveBg}
-          onGenerate={handleGenerate}
           onDownload={handleDownload}
           isProcessing={isProcessing}
           hasImage={!!originalImage}
           hasResult={!!editedImage}
           onWatermarkRemoved={setWatermarkRemoved}
           watermarkRemoved={watermarkRemoved}
+          onToggleChat={() => setChatOpen((v) => !v)}
+          chatOpen={chatOpen}
         />
       )}
-
-      <ChatBubble />
     </div>
   );
 };
