@@ -1,44 +1,35 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eraser, Download, Loader2, Lock, Unlock } from "lucide-react";
+import { Eraser, Download, Loader2, Lock, Unlock, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useT } from "@/hooks/use-lang";
 
 interface ActionBarProps {
-  prompt: string;
-  onPromptChange: (value: string) => void;
   onRemoveBg: () => void;
-  onGenerate: () => void;
   onDownload: () => void;
   isProcessing: boolean;
   hasImage: boolean;
   hasResult: boolean;
   onWatermarkRemoved: (removed: boolean) => void;
   watermarkRemoved: boolean;
+  onToggleChat: () => void;
+  chatOpen: boolean;
 }
 
 const ActionBar: React.FC<ActionBarProps> = ({
-  prompt,
-  onPromptChange,
   onRemoveBg,
-  onGenerate,
   onDownload,
   isProcessing,
   hasImage,
   hasResult,
   onWatermarkRemoved,
   watermarkRemoved,
+  onToggleChat,
+  chatOpen,
 }) => {
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [password, setPassword] = useState("");
   const t = useT();
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey && prompt.trim()) {
-      e.preventDefault();
-      onGenerate();
-    }
-  };
 
   const handlePasswordSubmit = () => {
     if (password === "AyllonAIfamilia") {
@@ -108,15 +99,13 @@ const ActionBar: React.FC<ActionBarProps> = ({
           </div>
         )}
 
-        <input
-          type="text"
-          value={prompt}
-          onChange={(e) => onPromptChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder={t("describeChanges")}
-          disabled={!hasImage || isProcessing}
-          className="bg-transparent px-4 py-2 flex-1 min-w-0 md:w-64 md:flex-none focus:outline-none text-sm text-foreground placeholder:text-muted-foreground disabled:opacity-40"
-        />
+        <button
+          onClick={onToggleChat}
+          title={t("chatAssistant")}
+          className={`p-2 rounded-lg transition-all active:scale-95 ${chatOpen ? "bg-primary text-primary-foreground" : "hover:bg-foreground/5 text-muted-foreground"}`}
+        >
+          <MessageCircle size={18} />
+        </button>
 
         <button
           onClick={onRemoveBg}
@@ -129,14 +118,6 @@ const ActionBar: React.FC<ActionBarProps> = ({
           ) : (
             <Eraser size={18} className="text-muted-foreground" />
           )}
-        </button>
-
-        <button
-          onClick={onGenerate}
-          disabled={!hasImage || isProcessing || !prompt.trim()}
-          className="bg-primary px-4 py-2 rounded-lg text-sm font-medium text-primary-foreground hover:brightness-110 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none"
-        >
-          {t("generate")}
         </button>
 
         {hasResult && (
